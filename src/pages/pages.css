@@ -1,0 +1,53 @@
+.mainPage {
+    width: 100%;
+}
+
+.aboutPage {
+    width: 100%;
+    min-height: calc(100vh - var(--navbar-height));
+    color: var(--text-color);
+}
+
+.aboutPage-img {
+    width: 20%;
+    height: auto;
+}
+
+.aboutPage li {
+    color: var(--text-color);
+}
+
+.marketPage {
+    width: 100%;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.cabinetPage {
+    width: 60%;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.contactsPage {
+    width: 100%;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.gamePage {
+    width: 80%;
+    height: calc(100vh - var(--navbar-height));
+}
+
+.adminGamePage {
+    width: 80%;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.adminUsersPage {
+    width: 90%;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.adminWalletsPage {
+    width: 80%;
+    min-height: calc(100vh - var(--navbar-height));
+}

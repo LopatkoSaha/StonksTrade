@@ -1,23 +1,43 @@
 .logo {
-    width: 50px;
-    height: 50px;
-    background-image: url('/src/assets/Logo.webp');
+    width: 5vh;
+    height: 5vh;
+    background-image: url('/src/assets/logoST.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    border-radius: 50%;
 }
 .navbar {
-    background-color: var(--main-color);
+    width: 100%;
+    background-color: var(--navbar-bg);
 }
 .navbar a {
-    color: var(--text-light-color);
+    color: var(--text-color);
 }
 .navbar a:hover {
-    color: var(--text-hover-color);
+    color: var(--accent-hover);
 }
 .navbar a.active {
-    color: var(--text-light-color)!important;
+    color: var(--accent-color)!important;
     cursor: default;
-    border: 1px solid var(--text-light-color);
+    border: 1px solid var(--accent-color);
     border-radius: 2px;
+}
+
+.navbar label {
+    color: var(--text-color);
+}
+
+.user {
+    width: 4vh;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--text-color);
+    font-size: 1.5rem;
+    padding: auto;
+    border-radius: 50%;
+    background-color: #198754;
+    color: var(--text-color);
 }

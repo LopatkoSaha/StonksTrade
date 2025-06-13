@@ -1,19 +1,88 @@
-.app {
-    position: relative;
-    background-color: var(--bg-color);
-}
-
 :root {
-    --main-color: #000099;
-    --text-light-color: antiquewhite;
-    --text-dark-color: #000033;
-    --text-hover-color: #f0d526;
+    --font-family: 'Segoe UI', Roboto, sans-serif;
+    --transition-time: 0.3s;
     --navbar-height: 70px;
-    --bg-color: #99ccff;
+  }
+  
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-family);
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    /* opacity: none; */
+  }
+  
+  /* Темы */
+  .dark {
+    --bg-color: #0D1117;
+    --card-bg: #161B22;
+    --text-color: #E6E6E6;
+    --text-secondary: #A0A0A0;
+    --border-color: #2A2E35;
+  
+    --accent-color: #4C9AFF;
+    --accent-hover: #3B7DCC;
+    --success-color: #16C784;
+    --danger-color: #EA3943;
+    --warn-color: #F0B90B;
+  
+    --navbar-bg: #0F141C;
+    --button-bg: var(--accent-color);
+    --button-text: #ffffff;
+  }
+  
+  .light {
+    --bg-color: #f5f6fa;
+    --card-bg: #ffffff;
+    --text-color: #1C1C1C;
+    --text-secondary: #5A5A5A;
+    --border-color: #DDDDDD;
+  
+    --accent-color: #3C3CFF;
+    --accent-hover: #2B2BE6;
+    --success-color: #16C784;
+    --danger-color: #EA3943;
+    --warn-color: #F0B90B;
+  
+    --navbar-bg: #ffffff;
+    --button-bg: var(--accent-color);
+    --button-text: #ffffff;
+  }
+
+  .connect {
+    position: fixed;
+    left: 10px;
+    top: 95%;
+  }
+
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 5px;
+    cursor: pointer;
 }
 
-.app.dark {
-    --main-color: #000033;
-    --text-light-color: white;
-    --bg-color: #9933ff;
+a {
+  text-decoration: none;
 }
+  

@@ -1,0 +1,47 @@
+.tableCouses-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.tableCouses-container {
+      width: 90%;
+      height: 90%;
+      margin: auto;
+      padding: 2vw 2vw;
+      color: var(--text-secondary);
+}
+
+.tableCouses-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vh;
+    font-size: 1.5rem;
+}
+
+.tableCouses-img {
+    width: 3vw;
+    height: 3vw;
+    box-sizing: border-box;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.tableCouses-name {
+    color: var(--text-secondary);  
+}
+
+.tableCouses-name:hover {
+    color: var(--accent-hover);
+}
+
+.tableCouses-course {
+
+}
+
+.tableCouses-diff {
+
+}

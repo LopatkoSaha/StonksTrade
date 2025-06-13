@@ -1,0 +1,17 @@
+.chartPage-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 80%;
+    min-height: calc(100vh - var(--navbar-height));
+}
+
+.chartPage-btnToggle {
+    align-self: start;
+    margin: 5px 0;
+}
+
+.chartPage-container {
+    width: 100%;
+}

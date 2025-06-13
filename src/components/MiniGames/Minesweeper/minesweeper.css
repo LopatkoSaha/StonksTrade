@@ -1,0 +1,163 @@
+.minesweeper-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.minesweeper-container {
+  width: 100%;
+  height: 95%;
+  margin: auto;
+}
+
+.minesweeper-content {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.minesweeper-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+}
+
+.minesweeper-gameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.minesweeper-gameinfo {
+  text-align: center;
+}
+.minesweeper-gameField {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(14, 13, 13);
+  width: 100%;
+  height: 100%;
+}
+
+.minesweeper-row {
+  display: flex;
+}
+
+.minesweeper-cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  padding: 10px;
+  border: 1px solid white;
+  cursor: pointer;
+  background-color: #aaa;
+}
+
+.minesweeper-close {
+  background-color: blue;
+}
+
+.one {
+  color: blue;
+}
+.one::before {
+    content: "1";
+  }
+
+.two {
+  color: green;
+}
+.two::before {
+    content: "2";
+  }
+
+.three {
+  color: rgb(255, 175, 2);
+}
+.three::before {
+    content: "3";
+}
+
+.four {
+  color: rgb(255, 81, 0);
+}
+.four::before {
+    content: "4";
+}
+
+.five {
+  color: rgb(212, 0, 255);
+}
+.five::before {
+    content: "5";
+}
+
+.six {
+  color: rgb(255, 0, 106);
+}
+.six::before {
+    content: "6";
+}
+
+.seven {
+  color: rgb(160, 36, 6);
+} 
+.seven::before {
+    content: "7";
+}
+
+.eight {
+  color: rgb(104, 14, 14);
+}
+.eight::before {
+    content: "8";
+}
+
+.minesweeper-bomb {
+  background-color: red;
+  color: white;
+}
+.minesweeper-bomb::before {
+    content: "";
+    display: inline-block; /* Позволяет отображать элемент */
+    width: 90%;
+    height: 90%;
+    background-image: url("../../../assets/bomb.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.minesweeper-lastMoveBomb {
+  background-color: green;
+}
+
+.minesweeper-flag {
+  background-color: rgb(206, 231, 96);
+  color: white;
+}
+.minesweeper-flag::before {
+    content: "";
+    display: inline-block;
+    width: 90%;
+    height: 90%;
+    background-image: url("../../../assets/flagRed.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

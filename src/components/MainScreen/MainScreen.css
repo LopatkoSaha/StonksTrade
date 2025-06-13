@@ -7,7 +7,7 @@
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    color: var(--text-light-color);
+    color: var(--text-secondary);
 }
 
 .main-screen .main-content {
@@ -22,3 +22,4 @@
     justify-self: flex-end;
     margin: 170px;
 }
+

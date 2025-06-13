@@ -1,9 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import appReducer from "./appSlice.ts";
+import theme from "./themeSlice";
+import courses from "./coursesSlice";
+import coinIcons from "./coinIconsSlice";
+import user from "./userSlice";
+import wallet from "./walletSlice";
+import message from "./messageSlice";
+import preorders from "./preorderSlice";
 
 export const store = configureStore({
   reducer: {
-    appData: appReducer,
+    theme: theme,
+    courses: courses,
+    coinIcons: coinIcons,
+    user: user,
+    wallet: wallet,
+    preorders: preorders,
+    message: message,
   },
 });
 
