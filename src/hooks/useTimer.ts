@@ -4,8 +4,8 @@ export function useTimer(gameTime: number) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [isWin, setIsWin] = useState(false);
   const endOfGame = useRef(0);
-  const timerId = useRef<NodeJS.Timeout | null>(null);
-  const intervalId = useRef<NodeJS.Timeout | null>(null);
+  const timerId = useRef<number | null>(null);
+  const intervalId = useRef<number | null>(null);
 
   useEffect(() => {
     intervalId.current = setInterval(() => {
