@@ -4,8 +4,7 @@ import { useState } from "react";
 import "./ChartPage.css";
 import { ChartDynamic } from "features/Charts/ChartDynamic";
 import { ChartHistory } from "features/Charts/ChartHistory";
-
-
+import ErrorBoundary from "components/ErrorBoundary";
 
 export const ChartPage = () => {
   const {currency} = useParams();
@@ -29,8 +28,10 @@ export const ChartPage = () => {
         <button onClick={chartToggle}>{chartType === "dynamic" ? "12 мес" : "1 день"}</button>
       </div>
       <div className="chartPage-container">
-        {chartType === "dynamic" && <ChartDynamic currency={currency ?? ""} />}
-        {chartType === "history" && <ChartHistory currency={currency ?? ""} />}
+        <ErrorBoundary>
+          {chartType === "dynamic" && <ChartDynamic currency={currency ?? ""} />}
+          {chartType === "history" && <ChartHistory currency={currency ?? ""} />}
+        </ErrorBoundary>
       </div>
     </div>
   );

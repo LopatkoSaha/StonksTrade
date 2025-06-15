@@ -1,68 +1,53 @@
 import { useState } from "react";
+import {
+  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid
+} from "recharts";
 
 import useWebSocket from "hooks/useWebSocket";
-import {  WS_ONE_URL } from "config";
-//@ts-ignore
-import CanvasJSReact from "@canvasjs/react-charts";
+import { WS_ONE_URL } from "config";
 
+type TChartData = {
+  course: string;
+  created_at: string;
+};
 
-type TChartData = { 
-  course: string,
-  created_at: string,
+function formatChartData(data: TChartData[]) {
+  return data.map(item => ({
+    time: new Date(item.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    price: +item.course,
+  }));
 }
 
-function generateOptions(data: TChartData[], currency: string) {
-  const options = {
-    animationEnabled: true,
-    theme: "dark1", // "light1", "light2", "dark1", "dark2"
-    zoomEnabled: true,
-    exportEnabled: false,
-    title: {
-      text: `Dynamic course of ${currency} for day`,
-    },
-    // subtitles: [{
-    //   text: "Weekly Averages"
-    // }],
-    axisX: {
-      interval: 1,
-      valueFormatString: "HH:mm"
-    },
-    axisY: {
-      prefix: "$",
-      title: "Price"
-    },
-    toolTip: { content: "Date: {x}<br /><strong>Price:</strong> {y}"},
-    data: [{
-      type: "line",
-      color: "red",
-      // type: "spline",
-      // markerSize: 0,
-      dataPoints: data.map((item) => ({
-        x: new Date(item.created_at),
-        y: +item.course,
-      }))
-    }],
-  };
-
-  return options;
-}
-
-
-export const ChartDynamic = (props: {currency: string}) => {
+export const ChartDynamic = (props: { currency: string }) => {
   const [chartData, setChartData] = useState<TChartData[]>([]);
 
-  const [isConnect] = useWebSocket(`${WS_ONE_URL}?curr=${props.currency}`, (data: TChartData[]) => {
-      if(Array.isArray(data)) {
-        setChartData(data);
-      }else{
-        setChartData((prev) => [...prev, data]);
-      }
-    });
+  useWebSocket(`${WS_ONE_URL}?curr=${props.currency}`, (data: TChartData[] | TChartData) => {
+    if (Array.isArray(data)) {
+      setChartData(data);
+    } else {
+      setChartData(prev => [...prev, data]);
+    }
+  });
+
+  const formattedData = formatChartData(chartData);
 
   return (
-    <div>
-      <CanvasJSReact.CanvasJSChart  options ={generateOptions(chartData, props.currency)} />
+    <div style={{ width: '100%', height: 400 }}>
+      <h3 className="text-lg font-semibold mb-2 text-center">
+        Dynamic course of {props.currency} for day
+      </h3>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={formattedData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="time" />
+          <YAxis dataKey="price" tickFormatter={(v) => `$${v}`} />
+          <Tooltip
+            formatter={(value: number) => `$${value.toFixed(2)}`}
+            labelFormatter={(label: string) => `Time: ${label}`}
+          />
+          <Line type="monotone" dataKey="price" stroke="#ff4d4f" dot={false} />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 };
-

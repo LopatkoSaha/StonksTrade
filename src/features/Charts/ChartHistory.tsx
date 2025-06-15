@@ -1,81 +1,74 @@
-import { useState, useEffect } from "react";
-
-
-//@ts-ignore
-import CanvasJSReact from "@canvasjs/react-charts";
+import { useEffect, useState } from "react";
+import {
+  ComposedChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Bar,
+  Line,
+  CartesianGrid
+} from "recharts";
 import { allCoursesPost } from "api/allCoursePost";
 
+type TChartData = {
+  date: number;
+  open_course: string;
+  min_course: string;
+  max_course: string;
+  close_course: string;
+};
 
-type TChartData = { 
-  date: Date,
-  open_course: string,
-  min_course: string,
-  max_course: string,
-  close_course: string,
-}
+type TRechartsItem = {
+  date: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+};
 
-
-function generateOptions(data: Record<string, any>[], currency: string) {
-
-  const options = {
-    animationEnabled: true,
-    theme: "dark1", // "light1", "light2", "dark1", "dark2"
-    zoomEnabled: true,
-    exportEnabled: false,
-    title: {
-      text: `History course of ${currency} for year`,
-    },
-    // subtitles: [{
-    //   text: "Weekly Averages"
-    // }],
-    axisX: {
-      interval: 1,
-      valueFormatString: "MMM DD"
-    },
-    axisY: {
-      prefix: "$",
-      title: "Price"
-    },
-    toolTip: { content: "Date: {x}<br /><strong>Price:</strong><br />Open: {y[0]}, Close: {y[3]}<br />High: {y[1]}, Low: {y[2]}"},
-    data: [{
-        type: "candlestick",
-        fallingColor: "#F79B8E",
-        risingColor: "yellow",
-        // color: "yellow",
-        // fillOpacity: .3,
-        yValueFormatString: "$##0.00",
-        dataPoints: data, //prepareCandlesData(data),
-    }],
-  };
-
-  return options;
-}
-
-
-export const ChartHistory = (props: {currency: string}) => {
-  const [chartData, setChartData] = useState<Record<string, any>[]>([]);
+export const ChartHistory = ({ currency }: { currency: string }) => {
+  const [data, setData] = useState<TRechartsItem[]>([]);
   
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const historyData: TChartData[] = await allCoursesPost(props.currency);
-        const data = historyData.map((item) => (
-          {
-            x: new Date(item.date),
-            y: [+item.open_course, +item.min_course, +item.max_course, +item.close_course],
-          }
-        ))
-        setChartData(data);
-      } catch (error) {
-        console.error("Ошибка при загрузке истории:", error);
+        const historyData: TChartData[] = await allCoursesPost(currency);
+        
+        const prepared: TRechartsItem[] = historyData.map((item) => {
+          const date = item.date.toString().split("T")[0];
+          return {
+            date,
+            open: parseFloat(item.open_course),
+            high: parseFloat(item.max_course),
+            low: parseFloat(item.min_course),
+            close: parseFloat(item.close_course),
+          };
+        });
+        setData(prepared);
+      } catch (err) {
+        console.error("Ошибка при загрузке истории:", err);
       }
     };
     fetchHistory();
-  }, [props.currency]);
-  
+  }, [currency]);
+
   return (
     <div>
-      <CanvasJSReact.CanvasJSChart  options ={generateOptions(chartData, props.currency)} />
+      <h3 className="text-secondary mb-2">История курса {currency}</h3>
+      <ResponsiveContainer width="100%" height={400}>
+        <ComposedChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" tick={{ fill: "#808080" }} />
+          <YAxis domain={["dataMin", "dataMax"]} tick={{ fill: "#808080" }} />
+          <Tooltip />
+          {/* Свеча в виде отрезка min -> max */}
+          <Bar dataKey="high" fill="transparent" stroke="yellow" />
+          <Bar dataKey="low" fill="transparent" stroke="#3dd15a" />
+          {/* Линия закрытия или можно добавить Line для close */}
+          <Line dataKey="close" stroke="red" dot={false} />
+        </ComposedChart>
+      </ResponsiveContainer>
     </div>
   );
 };
